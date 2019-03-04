@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are by default assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+		<!--1.指定日志格式及编码 -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+		<charset>UTF-8</charset>
+	</appender>
+	<!--2.指定日志打印到指定的文件目录中。路径设置不全，默认是tomcat盘中 log文件夹中-->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>/testlogs/liu.log</file>
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	<!--3.-指定日志的级别，日志分别应用到文件和控制台 -->
+	<root level="debug">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</root>
+	<!--4.-指定日志的对象和级别，日志分别应用到文件和控制台 -->
+	<logger name="org.mybatis" level="DEBUG" />
+</configuration>

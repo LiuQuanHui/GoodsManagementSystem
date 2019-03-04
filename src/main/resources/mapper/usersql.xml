@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="liu.code.dao.UserDao">
+	<sql id="base_list">uid,name,telephone,password,gender,address</sql>
+	<select id="findUser" resultType="User">
+		select <include refid="base_list"/> from goods_user where telephone=#{telephone} and password=#{password}
+	</select>
+	<select id="findAllUser" resultType="User">
+		select <include refid="base_list"/> from goods_user;
+	</select>
+	<insert id="addUser">
+		insert into goods_user(name,telephone,password,gender,address) values(#{name},#{telephone},#{password},#{gender},#{address})
+	</insert>
+	<delete id="deleteUser">
+		delete from liu where id=#{id}
+	</delete>
+	<update id="updateUser">
+		update goods_user <set>
+			name=#{name},
+			telephone=#{telephone},
+			password=#{password},
+			gender=#{gender},
+			address=#{address} 
+		</set>where uid=#{id};
+	</update>
+</mapper>

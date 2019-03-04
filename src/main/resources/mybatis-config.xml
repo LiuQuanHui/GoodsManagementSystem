@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- mybatis全局配置 -->
+	<settings>
+		<!-- 使用JDBC的getGenerateKeys，支持获取自增id -->
+		<setting name="useGeneratedKeys" value="true" />
+		<!-- 使用列别名替换别名 默认为true -->
+		<setting name="useColumnLabel" value="true" />
+		<!-- 开启驼峰命名 -->
+		<setting name="mapUnderscoreToCamelCase" value="ture" />
+	</settings>
+	<typeAliases>
+		<!-- 设置对象别名，表示在扫描包中所有的注解类，如没有指定类名，此处的别名对应sql的mapper.xml文件中的属性类型（parameterType）和结果类型(resultType)。方便统一管理 -->
+		<package name="liu.code.entity" />
+	</typeAliases>
+</configuration>

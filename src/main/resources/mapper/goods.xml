@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="liu.code.dao.GoodDao">
+	<sql id="baselist">
+		gId,goodName,goodType,goodProduct,goodPrice,goodNum,goodNumPrice
+	</sql>
+	<insert id="addGoods">
+		insert into
+		goods(goodName,goodType,goodProduct,goodPrice,goodNum,goodNumPrice)
+		values(#{goodName},#{goodType},#{goodProduct},#{goodPrice},#{goodNum},#{goodNumPrice})
+	</insert>
+	<select id="queryGoods" resultType="Good">
+		select
+		<include refid="baselist" />
+		from goods;
+	</select>
+	<select id="findGoodById" resultType="Good">
+		select
+		<include refid="baselist" />
+		from goods where gId=#{id};
+	</select>
+	<delete id="deleteGood">
+		delete from goods where gId=#{id};
+	</delete>
+	<update id="updateGood" parameterType="Good">
+		update goods
+		<set>
+			goodName=#{goodName},
+			goodType=#{goodType},
+			goodProduct=#{goodProduct},
+			goodPrice=#{goodPrice},
+			goodNum=#{goodNum},
+			goodNumPrice=#{goodNumPrice}
+		</set>
+		where gId=#{gId};
+	</update>
+</mapper>

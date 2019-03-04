@@ -1,0 +1,58 @@
+*{margin:0px;padding:0px;}
+#main{
+	width:100%;
+	height:auto;
+}
+
+#loginBody{
+	margin:0 auto;
+	width:36%;
+	height:300px;
+	background-color:#E0FFFF;
+	margin-top:100px;
+	text-align:center;
+	border-radius:6px;
+	box-shadow:3px 2px 2px #000;
+	border:1px;
+}
+.topic{padding-bottom:5px;padding-top:5px;}
+#formbody{width:80%;height:auto;margin:0 auto;}
+.glyphicon-user,.glyphicon-lock{
+	color:#CDC9C9;
+	font-size:30px;
+	display:block;line-height:30px;width:30px;
+	float:left;
+	padding-left:10%;
+	margin-bottom:10px;
+}
+#account,#password{
+
+	width:65%;
+	line-height:30px;
+	margin-bottom:10px;
+	border:none;
+	border-radius:2px;
+	
+}
+#btn_submit{
+	width:65%;
+	margin-left:10%;
+	line-height:30px;
+	margin-top:20px;
+	margin-bottom:20px;
+	border:none;
+	background-color:#BEBEBE;
+	border-radius:4px;
+}
+#accountWarn,#passwordWarn{
+	position:absolute;
+	width:100px;
+	line-height:30px;
+	
+	margin-bottom:10px;
+	font-size:10px;
+	color:red;
+}
+#remeber{
+	margin-left:-30%;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 1.加载数据库参数文件 -->
+	<context:property-placeholder
+		location="classpath:jdbc.properties" />
+	<!-- 2.c3p0连接池 配置数据库连接池 获取jdbc.properties参数 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 获取连接池属性 -->
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 数据库连接池最大连接数 -->
+		<property name="maxPoolSize" value="30" />
+		<!-- 数据库连接池最小连接数 -->
+		<property name="minPoolSize" value="10" />
+		<!-- 数据库连接超时时间 -->
+		<property name="checkoutTimeout" value="10000" />
+		<!-- 当前连接失败时可重新连接次数 -->
+		<property name="acquireRetryAttempts" value="3" />
+		<!-- 关闭连接时 不自动提交commit 即手动提交事务 -->
+		<property name="autoCommitOnClose" value="false" />
+	</bean>
+	<!-- 3.配置sqlSessionFactory对象 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 注入数据库连接池，ref引用数据库连接池的id -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 加载mybatis的全局配置 mybatis-config.xml -->
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
+		<!-- 扫描pojo包 用于mybatis别名 如果有多个则使用;隔开 -->
+		<property name="typeAliasesPackage" value="liu.code.entity" />
+		<!--扫描mapper文件下所有以xml为结尾的配置文件，主要是sql配置文件 -->
+		<property name="mapperLocations"
+			value="classpath:mapper/*.xml" />
+	</bean>
+	<!-- 4.配置扫描Dao接口包 动态实现Dao接口 注入到spring容器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描dao接口所在的包路径，value值代表包名 -->
+		<property name="basePackage" value="liu.code.dao" />
+		<!-- 注入sqlSessionFactory value代码数据库会话工厂类 -->
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+	</bean>
+</beans>
